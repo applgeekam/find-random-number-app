@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/to_app_home"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/text_menu_home"
+        />
+    <item
+        android:id="@+id/to_game_play"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/text_menu_play"
+        />
+    <item
+        android:id="@+id/to_game_history"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/text_menu_history"
+        />
+    <item
+        android:id="@+id/to_game_setting"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/text_menu_setting"
+        />
+    <item
+        android:id="@+id/to_game_quite"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="@string/text_menu_quite"
+        />
+</menu>
