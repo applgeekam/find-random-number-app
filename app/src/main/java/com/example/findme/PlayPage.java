@@ -3,6 +3,7 @@ package com.example.findme;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,6 +15,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 
 public class PlayPage extends AppCompatActivity {
@@ -22,81 +27,120 @@ public class PlayPage extends AppCompatActivity {
 
     private EditText input;
     private TextView labelInfo;
+    private TextView labelShowNUmber;
     private Button btnRest;
     private Button btnCheck;
+    private Button btnStart;
+
+
     private int secretNumber;
     private int chance;
     private  Random random = new Random();
+    private DatabaseManager databaseManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_play_page);
+        databaseManager = new DatabaseManager( this );
+
 
 
         input = (EditText) findViewById(R.id.input_number);
         labelInfo = (TextView) findViewById(R.id.label_info);
+        labelShowNUmber = (TextView) findViewById(R.id.label_show_number);
         btnRest = (Button) findViewById(R.id.btn_reset);
         btnCheck = (Button) findViewById(R.id.btn_check);
-        secretNumber = random.nextInt(100);
-        chance = 0;
+        btnStart = (Button) findViewById(R.id.btn_start);
 
 
+        labelShowNUmber.setVisibility(View.INVISIBLE);
 
         btnRest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                input.setText("");
-                secretNumber = random.nextInt(100);
-                chance = 0;
+                PlayPage.this.showToast("Game reset ! ");
+                labelShowNUmber.setVisibility(View.INVISIBLE);
                 labelInfo.setVisibility(View.INVISIBLE);
-                PlayPage.this.showToast("Game reseted ! ");
+                btnCheck.setEnabled(false);
+                btnStart.setEnabled(true);
             }
         });
+
+
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                input.setText("");
+                labelShowNUmber.setText("?");
+                labelShowNUmber.setVisibility(View.VISIBLE);
+                labelInfo.setVisibility(View.VISIBLE);
+                labelInfo.setText("Enter a number.");
+                showToast("Game start !");
+                btnCheck.setEnabled(true);
+                btnStart.setEnabled(false);
+
+                secretNumber = random.nextInt(100);
+                chance = 0;
+            }
+        });
+
 
 
         btnCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
-                int currentNUmber = Integer.parseInt(input.getText().toString());
                 labelInfo.setVisibility(View.VISIBLE);
-                if (chance == 4 && currentNUmber != secretNumber)
+                if (input.getText().toString().equals(""))
                 {
-                    input.setText("");
-                    showToast("Game lose. ");
-                    labelInfo.setText("You lose ! The number was " + Integer.toString(secretNumber) + ". You may win next time. Try again");
-                    secretNumber = random.nextInt(100);
-                    chance = 0;
+                    labelInfo.setText("Please, enter a number.");
                 }
-                else
-                {
-                    if (currentNUmber == secretNumber)
+                else {
+                    int currentNUmber = Integer.parseInt(input.getText().toString());
+                    if (chance == 4 && currentNUmber != secretNumber)
                     {
-                        showToast("You win ! ");
-                        input.setText("");
-                        secretNumber = random.nextInt(100);
-                        chance = 0;
-                        labelInfo.setText("You win ! The number was " + Integer.toString(secretNumber) + ". Good job. Try again");
-                    }
-                    else if (currentNUmber > secretNumber)
-                    {
-                        showToast("You lose ! Your number is greater. ");
-                        input.setText("");
-                        labelInfo.setText("You lose. You still have " + Integer.toString(4 - chance) + " try. Try again.");
-                        chance = ((int) chance) + 1;
+                        btnCheck.setEnabled(false);
+                        btnStart.setEnabled(true);
+                        showToast("Game lose. ");
+                        labelShowNUmber.setText(Integer.toString(secretNumber));
+                        labelInfo.setText("You lose ! The number was " + secretNumber + ". You may win next time. Play again");
+
+                        // Save data to db
+                        databaseManager.insertScore( new Score( false, secretNumber, new Date() ));
                     }
                     else
                     {
+                        if (currentNUmber == secretNumber)
+                        {
+                            btnCheck.setEnabled(false);
+                            btnStart.setEnabled(true);
+                            showToast("You win ! ");
+                            labelShowNUmber.setText(Integer.toString(secretNumber));
+                            labelInfo.setText("You win ! The number was " + (secretNumber) + ". Good job. Play again");
 
-                        showToast("You lose ! Your number is smaller. ");
-                        input.setText("");
-                        labelInfo.setText("You lose. You still have " + Integer.toString(4 - chance) + " try. Try again.");
-                        chance = ((int) chance) + 1;
+//                            Save data to db
+                            databaseManager.insertScore( new Score( true, secretNumber, new Date() ));
+
+                        }
+                        else if (currentNUmber > secretNumber)
+                        {
+                            showToast("You lose ! Your number is greater. ");
+                            input.setText("");
+                            labelInfo.setText("You lose. You still have " + (4 - chance) + " try. Try again.");
+                            chance = ((int) chance) + 1;
+                        }
+                        else
+                        {
+
+                            showToast("You lose ! Your number is smaller. ");
+                            input.setText("");
+                            labelInfo.setText("You lose. You still have " + (4 - chance) + " try. Try again.");
+                            chance = ((int) chance) + 1;
+                        }
                     }
                 }
-
             }
         });
 
@@ -141,6 +185,12 @@ public class PlayPage extends AppCompatActivity {
         text.setTextColor(Color.WHITE);
         toast.show();
 
+    }
+
+    private String getDateTime() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 
 
