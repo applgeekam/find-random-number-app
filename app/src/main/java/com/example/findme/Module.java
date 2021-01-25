@@ -18,6 +18,10 @@ public class Module {
     public static void setMenuItem(Context context, int id)
     {
         switch (id){
+            case R.id.to_app_home:
+                Intent intentToMainPage = new Intent(context, MainPage.class);
+                context.startActivity(intentToMainPage);
+                break;
             case R.id.to_game_play:
                 Intent intentToPlayPage = new Intent(context, PlayPage.class);
                 context.startActivity(intentToPlayPage);
