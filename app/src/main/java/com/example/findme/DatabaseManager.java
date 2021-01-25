@@ -64,4 +64,15 @@ public class DatabaseManager extends OrmLiteSqliteOpenHelper {
         }
     }
 
+    public void resetAll(List<Score> scores)
+    {
+        try {
+            Dao<Score, Integer> dao = getDao( Score.class );
+            dao.delete(scores);
+            Log.i( "DATABASE", "All scores deleted" );
+        } catch( Exception exception ) {
+            Log.e( "DATABASE", "Can't delete scores from Database", exception );
+        }
+    }
+
 }

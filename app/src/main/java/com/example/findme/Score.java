@@ -14,6 +14,7 @@ public class Score {
     private boolean score;
     @DatabaseField
     private int number;
+
     @DatabaseField
     private Date when;
 
@@ -26,6 +27,18 @@ public class Score {
         this.score = score;
         this.number = number;
         this.when = when;
+    }
+
+    public boolean isScore() {
+        return score;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public Date getWhen() {
+        return when;
     }
 
 

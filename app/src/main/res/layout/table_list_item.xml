@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tableHeaderDate"
+        android:layout_width="160dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:text="@string/text_table_date"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tableHeaderNumber"
+        android:layout_width="126dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:text="@string/text_table_number"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tableHeaderScore"
+        android:layout_width="124dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:text="@string/text_table_score"
+        android:textSize="18sp" />
+
+
+</LinearLayout>

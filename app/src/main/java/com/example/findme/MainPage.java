@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainPage extends AppCompatActivity {
 
 //    Components
 
@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, PlayPage.class);
+                Intent intent = new Intent(MainPage.this, PlayPage.class);
                 startActivity(intent);
             }
         });
@@ -41,15 +41,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
-            case R.id.to_game_quite:
-                finish();
-                return true;
-            case R.id.to_game_play:
-                Intent intent = new Intent(MainActivity.this, PlayPage.class);
-                startActivity(intent);
-                return true;
-        }
+        Module.setMenuItem(MainPage.this, item.getItemId());
 
         return super.onOptionsItemSelected(item);
     }

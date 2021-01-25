@@ -45,8 +45,6 @@ public class PlayPage extends AppCompatActivity {
         setContentView(R.layout.activity_play_page);
         databaseManager = new DatabaseManager( this );
 
-
-
         input = (EditText) findViewById(R.id.input_number);
         labelInfo = (TextView) findViewById(R.id.label_info);
         labelShowNUmber = (TextView) findViewById(R.id.label_show_number);
@@ -54,7 +52,7 @@ public class PlayPage extends AppCompatActivity {
         btnCheck = (Button) findViewById(R.id.btn_check);
         btnStart = (Button) findViewById(R.id.btn_start);
 
-
+        btnCheck.setEnabled(false);
         labelShowNUmber.setVisibility(View.INVISIBLE);
 
         btnRest.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +65,6 @@ public class PlayPage extends AppCompatActivity {
                 btnStart.setEnabled(true);
             }
         });
-
 
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,8 +82,6 @@ public class PlayPage extends AppCompatActivity {
                 chance = 0;
             }
         });
-
-
 
         btnCheck.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,15 +151,7 @@ public class PlayPage extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()){
-            case R.id.to_game_quite:
-                finish();
-                return true;
-            case R.id.to_game_play:
-                Intent intent = new Intent(PlayPage.this, PlayPage.class);
-                startActivity(intent);
-                return true;
-        }
+        Module.setMenuItem(PlayPage.this, item.getItemId());
 
         return super.onOptionsItemSelected(item);
     }
@@ -185,12 +172,6 @@ public class PlayPage extends AppCompatActivity {
         text.setTextColor(Color.WHITE);
         toast.show();
 
-    }
-
-    private String getDateTime() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault());
-        Date date = new Date();
-        return dateFormat.format(date);
     }
 
 

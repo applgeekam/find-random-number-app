@@ -20,16 +20,4 @@
         app:showAsAction="never"
         android:title="@string/text_menu_history"
         />
-    <item
-        android:id="@+id/to_game_setting"
-        android:orderInCategory="100"
-        app:showAsAction="never"
-        android:title="@string/text_menu_setting"
-        />
-    <item
-        android:id="@+id/to_game_quite"
-        android:orderInCategory="100"
-        app:showAsAction="never"
-        android:title="@string/text_menu_quite"
-        />
 </menu>

@@ -6,10 +6,15 @@
     <string name="text_menu_history">History</string>
     <string name="text_btn_reset">Reset</string>
     <string name="text_btn_try">Check </string>
-    <string name="text_wellcom">"Wellcome on FindMe "</string>
+    <string name="text_wellcom">"Welcome on FindMe "</string>
     <string name="text_presentation">Rules : Un nombre est choisit au hasard entre 0 et 100, et vous donne cinq chance pour deviner ce nombre. Si vous arrivez a devener le nombre avant d\'expirer ces cinq chances, vous gagnez. Sinon, vous perdez.</string>
     <string name="text_input_label">Type your number</string>
     <string name="text_menu_home">Home</string>
     <string name="text_btn_play">Play</string>
     <string name="text_page_findNumber">Find the number</string>
+    <string name="text_page_historique">Historique</string>
+    <string name="text_table_date">Date</string>
+    <string name="text_table_number">Number</string>
+    <string name="text_table_score">Score</string>
+    <string name="text_btn_Delete">Delete All</string>
 </resources>
