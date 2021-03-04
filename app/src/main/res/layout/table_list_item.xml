@@ -10,7 +10,7 @@
         android:layout_weight="0.333"
         android:layout_height="match_parent"
         android:layout_gravity="top"
-        android:layout_width="wrap_content"
+        android:layout_width="160dp"
         android:text="@string/text_table_date"
         android:textSize="18sp" />
 
@@ -20,17 +20,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:text="@string/text_table_number"
-        android:layout_width="wrap_content"
+        android:layout_width="126dp"
         android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tableHeaderScore"
+        android:layout_width="124dp"
         android:layout_weight="0.333"
         android:layout_height="match_parent"
         android:layout_gravity="top"
         android:text="@string/text_table_score"
         android:textSize="18sp"
-        android:layout_width="wrap_content" />
+        />
 
 
 </LinearLayout>
